@@ -1,0 +1,1008 @@
+============================================
+vis/output.txt
+16:07:06_Thursday_04_June_2020
+============================================
+
+Compiling a1 using Makefile
+$ make clean
+rm *.o
+$ make
+gcc -g -Wall -Wno-comment -std=c99 -c main.c
+gcc -g -Wall -Wno-comment -std=c99 -c hash.c
+gcc -g -Wall -Wno-comment -std=c99 -c text_analysis.c
+gcc -g -Wall -Wno-comment -std=c99 -c deque.c
+gcc -g -Wall -Wno-comment -std=c99 -c util.c
+gcc -g -Wall -Wno-comment -std=c99 -o a2 main.o hash.o text_analysis.o deque.o util.o
+
+
+Compilation Successful
+
+
+Testing Problem 1 (a)
+===
+Problem 1 (a) test 1: correct
+Problem 1 (a) test 2: correct
+Problem 1 (a) test 3: correct
+Problem 1 (a) test 4: correct
+Problem 1 (a) test 5: correct
+Problem 1 (a) test 6: correct
+
+Testing Problem 1 (b)
+===
+Problem 1 (b) test 1: correct
+Problem 1 (b) test 2: correct
+Problem 1 (b) test 3: correct
+Problem 1 (b) test 4: correct
+Problem 1 (b) test 5: correct
+Problem 1 (b) test 6: correct
+
+Testing Problem 2 (a)
+===
+Problem 2 (a) test 1: correct
+Problem 2 (a) test 2: correct
+Problem 2 (a) test 3: correct
+Problem 2 (a) test 4: correct
+Problem 2 (a) test 5: correct
+Problem 2 (a) test 6: correct
+
+Testing Problem 2 (b)
+===
+Problem 2 (b) test 1: correct
+Problem 2 (b) test 2: correct
+Problem 2 (b) test 3: correct
+Problem 2 (b) test 4: correct
+Problem 2 (b) test 5: correct
+Problem 2 (b) test 6: correct
+
+Testing Problem 2 (c)
+===
+Problem 2 (c) test 1: correct
+Problem 2 (c) test 2: correct
+Problem 2 (c) test 3: correct
+Problem 2 (c) test 4: correct
+Problem 2 (c) test 5: correct
+Problem 2 (c) test 6: correct
+
+Results
+===
+Problem 1 (a): 6 tests passed (3.0/3.0)
+Problem 1 (b): 6 tests passed (3.0/3.0)
+Problem 2 (a): 6 tests passed (3.0/3.0)
+Problem 2 (b): 6 tests passed (2.0/2.0)
+Problem 2 (c): 6 tests passed (2.0/2.0)
+Overall: 13.0 marks out of an available 13.0
+
+============================================
+src/Makefile
+16:07:06_Thursday_04_June_2020
+============================================
+# Makefile for Assignment 2
+#
+# created for COMP20007 Design of Algorithms 2020
+# written by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+# changes by <Insert Name Here>
+
+# The compiler flags used when compiling
+CFLAGS=-g -Wall -Wno-comment -std=c99
+
+a2: main.o hash.o text_analysis.o deque.o util.o
+	gcc $(CFLAGS) -o a2 main.o hash.o text_analysis.o deque.o util.o
+
+main.o: main.c hash.h text_analysis.h deque.h util.h
+	gcc $(CFLAGS) -c main.c
+
+hash.o: hash.c hash.h
+	gcc $(CFLAGS) -c hash.c
+
+text_analysis.o: text_analysis.c text_analysis.h deque.h util.h
+	gcc $(CFLAGS) -c text_analysis.c
+
+deque.o: deque.c deque.h util.h
+	gcc $(CFLAGS) -c deque.c
+
+util.o: util.c util.h
+	gcc $(CFLAGS) -c util.c
+
+
+# Add or update any of these rules to include additional files/modules you may
+# include. You can add additional compiler flags as well, however you should
+# not remove the -Wall flag.
+
+# This .PHONY command declares the "clean" rule as a phony one, i.e., it means
+# that the clean rule will run instructions but it wont create a file called
+# "clean" like a normal rule would (e.g., the util.o rule results in a file
+# called util.o being created).
+.PHONY: clean
+
+clean:
+	rm *.o
+	rm a2
+============================================
+src/util.h
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Functionality used accross the Assignment 1 program
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ * editted by <Shromann Majumder>
+ */
+
+#ifndef UTIL_H
+#define UTIL_H
+
+// Prints an error of the format "error: <error message>" and exits the
+// program with a non-zero error code
+void exit_with_error(char *error);
+
+// TODO: Add any more miscelaneous functions required in your program
+#include "stdlib.h"
+
+
+#endif
+============================================
+src/text_analysis.h
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Text Analysis module for Assignment 2.
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * template by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ * implementation by <Shromann Majumder>
+ */
+
+
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <string.h> 
+#include <stdbool.h> 
+#include <assert.h> 
+#include "deque.h"
+
+#ifndef TEXT_ANALYSIS_H
+#define TEXT_ANALYSIS_H
+
+#define ALPHABET_SIZE 26
+#define MAXCHARSIZE 99
+#define NULLBYTE '\0'
+#define START '^'
+#define END '$'
+#define STARTINGLETTER 'a'
+
+//------------------------------------Tries-----------------------------------
+typedef struct node node_t; 
+struct node { 
+    node_t *child[ALPHABET_SIZE]; // children of the node 
+    char data; // the charactar associated with the 
+    int isWord; // Number of times this combination exists
+    int freq; // Number of times this node charactar exists
+}; 
+// initilise a node 
+node_t *init_node(char c);
+// build a trie with the word give 
+void build(node_t *root, char text[MAXCHARSIZE]);
+// travese pre-orderly thru the trie
+void traverse(node_t *root);
+// return the index of the child array for a particular charactar 
+int hashf(char c);
+// prints all prefixes of length k 
+void prefix_print(node_t *root, char str[MAXCHARSIZE], int K, int level);
+// makes a deque full possible words that have 'text' as the prefix 
+// and thier frqueinces of the word
+int pr(node_t *root, char text[MAXCHARSIZE], Deque *topfive); 
+// returns true if a node has no children and false other wise
+bool noChildren(node_t *root); 
+// gets all the words that from prefix and adds them to the deque 
+// in order: decreasing word frequencies and alphabetically 
+
+void getWords(node_t *root, char stub[MAXCHARSIZE], Deque *topfive);
+// free trie
+void free_trie(node_t *root);
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+//----------------------------------Problems----------------------------------
+void problem_2_a();
+void problem_2_b();
+void problem_2_c();
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#endif
+============================================
+src/hash.h
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Hashing module for Assignment 2.
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * template by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ * implementation by <Shromann Majumder>
+ */
+
+#include "stdio.h"
+#include "string.h"
+#include "stdlib.h"
+#include "assert.h"
+
+#ifndef HASH_H
+#define HASH_H
+#define MAX_STRING_SIZE 256
+#define TWO_POWER_SIX 64
+#define NUMBER_OF_ALPHABETS 26
+#define INITIAL 0
+#define DOUBLE 2
+#define TRUE 1
+#define FALSE 0
+#define NULLCHAR "\0"
+
+#define SMALLA 'a'
+#define	BIGA 'A'
+#define SMALLZ 'z'
+#define	BIGZ 'Z'
+#define	NINE '9'
+#define ZERO '0'
+
+
+typedef char string[MAX_STRING_SIZE];
+
+void problem_1_a();
+void problem_1_b();
+
+// This returns 'chr' value of a charactar.
+int chr(char c);
+
+// This returns the hashvalue value of a charactar under bounds of M.
+int hash_function(string str, int M);
+
+
+// Inserts string into hashtable
+string *insert(string *hashtable, string str ,int *M, int K);
+
+// Makes a new hashtable
+string *make_hashtable(int M);
+
+// returns if the string is nothing or not  
+int is_NULL(string str);
+
+
+#endif
+============================================
+src/deque.c
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Deque module (i.e., double ended queue) for Assignment 1
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * template by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ * implementation by <Shromann Majumder>
+ */
+
+
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "deque.h"
+
+
+// Create a new empty Deque and return a pointer to it
+Deque *new_deque() {
+	Deque *deque = malloc(sizeof(*deque));
+	assert(deque);
+
+	deque->top = NULL;
+	deque->bottom = NULL;
+	deque->size = STARTDEQUESIZE;
+
+	return deque;
+}
+
+// Remove the bottom element from a Deque
+void deque_remove(Deque *deque) {
+
+  Node *old_bottom = deque->bottom;
+
+  if (deque->size == STARTDEQUESIZE) {
+    deque->top = NULL;
+    deque->bottom = NULL;
+  } else {
+    deque->bottom = old_bottom->prev;
+    deque->bottom->next = NULL;
+  }
+
+  deque->size--;
+
+  free(old_bottom);
+}
+
+
+
+// Free the memory associated with a Deque
+void free_deque(Deque *deque) {
+  // Remove (and thus free) all of the dnodes in the Deque.
+  while (deque->size > STARTDEQUESIZE) {
+    deque_remove(deque);
+  }
+
+	// Free the deque struct itself
+	free(deque);
+}
+
+// Create a new Node with a given piece of data
+Node *new_dnode(char data[MAXCHARSIZE], int pr) {
+  Node *dnode = malloc(sizeof(*dnode));
+  assert(dnode);
+
+  dnode->next = NULL;
+  dnode->prev = NULL;
+  strcpy(dnode->data,data);
+  dnode->pr = pr;
+  
+
+  return dnode;
+}
+
+// Free the memory associated with a Node
+void free_dnode(Node *dnode) {
+  free(dnode);
+}
+
+// Add an element to the top of a Deque
+void deque_push(Deque *deque, Node* new) {
+
+  if (deque->size > STARTDEQUESIZE) {
+    new->next = deque->top;
+    deque->top->prev = new;
+  } else {
+    // If the Deque was initially empty then new is both the top and bottom
+    deque->bottom = new;
+  }
+
+  deque->top = new;
+  deque->size++;
+}
+
+// Add an element to the bottom of a Deque
+void deque_insert(Deque *deque, Node* new) {
+
+  if (deque->size > STARTDEQUESIZE) {
+    new->prev = deque->bottom;
+    deque->bottom->next = new;
+  } else {
+    // If the Deque was initially empty then new is both the top and bottom
+    deque->top = new;
+  }
+
+  deque->bottom = new;
+  deque->size++;
+}
+
+
+// Return the number of elements in a Deque
+int deque_size(Deque *deque) {
+  return deque->size;
+}
+
+// Print the top 5 Deque :
+void print_deque(Deque *deque, int stub_freq) {
+  Node *current = deque->top;
+  int i = STARTDEQUESIZE;
+  while (current && i < PRINTCOUNT) {
+    printf("%.2f %s\n", (double)current->pr/(double)stub_freq,current->data);
+    // Print a comma unless we just printed the final element
+    current = current->next;
+    i++;
+  }
+}
+
+// Inserts in new node in the deque in decreasing "pr" values and alphabetically
+void sortedInsert(Deque **deque, Node* new) { 
+ 
+  Node* current = (*deque)->top; 
+ 
+  // if list is empty 
+  if ((*deque)->top == NULL){
+    deque_push(*deque, new);
+  }  
+  // if the node is to be inserted at the beginning 
+  // of the doubly linked list 
+  else if ((*deque)->top->pr < new->pr) { 
+    deque_push(*deque, new);
+  }
+  // if the node is to be inserted at the end 
+  // of the doubly linked list
+  else if ((*deque)->bottom->pr > new->pr) { 
+    deque_insert(*deque, new); 
+  } 
+  // if the node is to be inserted in the middle 
+  // of the doubly linked list
+  else { 
+    
+    // locate the node after which the new node 
+    // is to be inserted 
+    while (current->next != NULL && current->next->pr >= new->pr){
+      if(current->next->pr == new->pr && !strcmp(new->data, current->next->data)){
+        break;
+      }
+      current = current->next; 
+    }
+    
+    
+    /*Make the appropriate links */
+    new->next = current->next; 
+    // if the new node is not inserted 
+    // at the end of the list 
+    if (current->next != NULL){ 
+      new->next->prev = new; 
+    }
+    else{
+      (*deque)->bottom = new;
+    }
+    current->next = new; 
+    new->prev = current;
+    
+
+  } 
+} 
+
+============================================
+src/main.c
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Main program for Assignment 2
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ */
+
+// DO NOT CHANGE THIS FILE
+
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "hash.h"
+#include "text_analysis.h"
+#include "deque.h"
+#include "util.h"
+
+
+// We expect the command to have the form: PROG OPT
+#define EXPECTED_OPTS 2
+
+// Command line argument options
+#define OPT_P1A 1
+#define OPT_P1B 2
+#define OPT_P2A 3
+#define OPT_P2B 4
+#define OPT_P2C 5
+
+// Prints out the usage instructions and valid command line arguments for this
+// program.
+void print_usage(char *prog_name);
+
+// Returns the command line option given to this program.
+//
+// If there are too many (> 1) or not enough (0) command line arguments
+// provided an error is printed, along with the usage of the program.
+int get_option(int argc, char **argv);
+
+int main(int argc, char **argv) {
+  int opt = get_option(argc, argv);
+
+  if (opt == OPT_P1A) {
+    problem_1_a();
+  } else if (opt == OPT_P1B) {
+    problem_1_b();
+  } else if (opt == OPT_P2A) {
+    problem_2_a();
+  } else if (opt == OPT_P2B) {
+    problem_2_b();
+  } else if (opt == OPT_P2C) {
+    problem_2_c();
+  }
+
+  return 0;
+}
+
+// Prints out the usage instructions and valid command line arguments for this
+// program.
+void print_usage(char *prog_name) {
+  printf("usage: %s [option] < <input_file>\n", prog_name);
+  printf("\n");
+  printf("options:\n");
+  printf("\tp1a \tTest the problem_1_a() function\n");
+  printf("\tp1b \tTest the problem_1_b() function\n");
+  printf("\tp2a \tTest the problem_2_a() function\n");
+  printf("\tp2b \tTest the problem_2_b() function\n");
+  printf("\tp2c \tTest the problem_2_c() function\n");
+}
+
+// Returns the command line option given to this program.
+//
+// If there are too many (> 1) or not enough (0) command line arguments
+// provided an error is printed, along with the usage of the program.
+int get_option(int argc, char **argv) {
+  char *opt;
+
+  // Confirm that there are the correct number of command line arguments
+  if (argc < EXPECTED_OPTS) {
+    print_usage(argv[0]);
+    exit(EXIT_SUCCESS);
+  } else if (argc > EXPECTED_OPTS) {
+    fprintf(stderr, "error: expected exactly one command line argument\n");
+    print_usage(argv[0]);
+    exit(EXIT_FAILURE);
+  }
+
+  // Use strcmp to determine whether a valid command line option was provided
+  opt = argv[1];
+  if (strcmp(opt, "p1a") == 0) {
+    return OPT_P1A;
+  } else if (strcmp(opt, "p1b") == 0) {
+    return OPT_P1B;
+  } else if (strcmp(opt, "p2a") == 0) {
+    return OPT_P2A;
+  } else if (strcmp(opt, "p2b") == 0) {
+    return OPT_P2B;
+  } else if (strcmp(opt, "p2c") == 0) {
+    return OPT_P2C;
+  }
+
+  fprintf(stderr, "error: unexpected command line argument \"%s\"\n", opt);
+  print_usage(argv[0]);
+  exit(EXIT_FAILURE);
+}
+============================================
+src/util.c
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Functionality used accross the Assignment 1 program
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ * editted by <Shromann Majumder>
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "util.h"
+
+// Prints an error of the format "error: <error message>" and exits the
+// program with a non-zero error code
+void exit_with_error(char *error) {
+  fprintf(stderr, "error: %s\n", error);
+  exit(EXIT_FAILURE);
+}
+
+// TODO: Add any more miscelaneous functions required in your program
+============================================
+src/deque.h
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Deque module (i.e., double ended queue) for Assignment 1
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * template by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ * implementation by <Shromann Majumder>
+ */
+
+
+#ifndef DEQUE_H
+#define DEQUE_H
+
+#include "util.h"
+#include "string.h"
+
+#define MAXCHARSIZE 99
+#define PRINTCOUNT 5
+#define STARTDEQUESIZE 0
+#define ONEELEMENT 1
+
+
+// DO NOT CHANGE THESE TYPE DEFINITIONS
+
+// The data type that our Deque will contain
+typedef int Data;
+
+// Our Deque is implemented using a doubly-linked list
+typedef struct deque Deque;
+
+// The Nodes which make up the doubly-linked list
+typedef struct dnode Node;
+
+struct deque {
+  Node *top;
+  Node *bottom;
+  int size;
+};
+
+struct dnode {
+  Node *next;
+  Node *prev;
+  char data[MAXCHARSIZE];
+  int pr;
+};
+
+// Create a new empty Deque and return a pointer to it
+Deque *new_deque();
+
+// Free the memory associated with a Deque
+void free_deque(Deque *deque);
+
+// Create a new Node with a given piece of data
+Node *new_dnode(char data[MAXCHARSIZE], int pr);
+
+// Free the memory associated with a Node
+void free_dnode(Node *dnode);
+
+// Add an element to the top of a Deque
+void deque_push(Deque *deque, Node * new);
+
+// Add an element to the bottom of a Deque
+void deque_insert(Deque *deque, Node* new);
+
+// Remove the bottom element from a Deque
+void deque_remove(Deque *deque);
+
+// Return the number of elements in a Deque
+int deque_size(Deque *deque);
+
+// Print the top 5 Deque :
+void print_deque(Deque *deque, int stub_freq);
+
+// Inserts in new node in the deque in decreasing "pr" values and alphabetically
+void sortedInsert(Deque** deque, Node* new);
+
+#endif
+============================================
+src/hash.c
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Hashing module for Assignment 2.
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * template by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ * implementation by <Shromann Majumder>
+ */
+
+#include "hash.h"
+
+// Implements a solution to Problem 1 (a), which reads in from stdin:
+//   N M
+//   str_1
+//   str_2
+//   ...
+//   str_N
+// And outputs (to stdout) the hash values of the N strings 1 per line.
+// Computes the hash value using Horner's Rule.
+
+void problem_1_a() {
+
+  int n, M;
+  string str;
+
+  // get n and M values
+  scanf("%d %d\n", &n, &M);
+
+  // get n strings and output thier hashvalue thru the hash_function. 
+  int i;
+  for (i = INITIAL; i < n; i++){
+    scanf("%s\n", str);
+    printf("%d\n", hash_function(str, M));
+  }
+}
+
+// Implements a solution to Problem 1 (b), which reads in from stdin:
+//   N M K
+//   str_1
+//   str_2
+//   ...
+//   str_N
+// Each string is inputed (in the given order) into a hash table with size
+// M. The collision resolution strategy must be linear probing with step
+// size K. If an element cannot be inserted then the table size should be
+// doubled and all elements should be re-hashed (in index order) before
+// the element is re-inserted.
+//
+// This function must output the state of the hash table after all insertions
+// are performed, in the following format
+//   0: str_k
+//   1:
+//   2: str_l
+//   3: str_p
+//   4:
+//   ...
+//   (M-2): str_q
+//   (M-1):
+void problem_1_b() {
+
+  int N, M, K, i;
+  scanf("%d %d %d\n", &N, &M, &K);
+
+  string *hashtable = make_hashtable(M);
+  string text;
+  for (i = 0; i < N; i++){
+    scanf("%s\n", text);
+    hashtable = insert(hashtable, text, &M, K);
+  }
+
+  for (i = 0; i < M; i++){
+    printf("%d: %s\n", i, hashtable[i]);
+  }
+
+  free(hashtable); 
+
+}
+
+
+/* ___________________________ Helper Functions ______________________________*/
+
+// returns if the string is nothing or not 
+int is_NULL(string str){
+    if (strcmp(str, NULLCHAR) == 0){
+        return TRUE;
+    }    
+    return FALSE;
+}
+
+// Makes a new hashtable
+string *make_hashtable(int M){
+    string *hashtable = (string*)malloc(M*sizeof(string));
+    assert(hashtable);
+    int i;
+    for (i = 0; i < M; i++){
+        strcpy(hashtable[i],NULLCHAR);
+    }
+    return hashtable;
+}
+
+// Inserts string into hashtable
+string *insert(string *hashtable, string str ,int *M, int K){
+    // if there is an empty spot at the hashvalue, 
+    // insert the string there. 
+    int key = hash_function(str, *M);
+    if(is_NULL(hashtable[key])){
+        strcpy(hashtable[key], str);
+        return hashtable;
+    }
+    
+    // find the next spot in the hashtable and try to insert it there
+    int new_key;
+    new_key = (key + K) % *M;
+    while(new_key != key){
+        if(is_NULL(hashtable[new_key])){
+            strcpy(hashtable[new_key], str);
+            return hashtable; 
+        }   
+        new_key = (new_key + K) % (*M);  
+    }
+
+    // if nothing works, then make a new hashtable double the size of the previous one
+    // rehash then add the current string
+    string *new_hashtable = make_hashtable((*M)*DOUBLE);
+    int j;
+    int old_M = *M;
+    (*M) *= DOUBLE;
+    for (j = 0; j < old_M; j++){
+        if(!is_NULL(hashtable[j])){
+            new_hashtable = insert(new_hashtable,hashtable[j], M, K); 
+        }
+    }
+
+    free(hashtable);
+
+    new_hashtable = insert(new_hashtable, str, M, K);
+    return new_hashtable; 
+}
+
+// This returns 'chr' value of a charactar.
+int chr(char c){
+  int chr;
+  if(SMALLA <= c && c <= SMALLZ){
+    chr = c - SMALLA;
+  } 
+  if(BIGA <= c && c <= BIGZ){
+    chr = c - BIGA + NUMBER_OF_ALPHABETS;
+  }
+  if(ZERO <= c && c <= NINE){
+    chr = c - ZERO + (DOUBLE * NUMBER_OF_ALPHABETS);
+  }
+  return chr;  
+}
+
+// This returns the hashvalue value of a charactar under bounds of M.
+int hash_function(string str, int M){
+  int result = chr(str[INITIAL]); 
+  int i;
+  for(i = 1; i < strlen(str); i++){
+    result = (result * (TWO_POWER_SIX) + chr(str[i])) % M;
+  }
+  return result % M; 
+}
+============================================
+src/text_analysis.c
+16:07:06_Thursday_04_June_2020
+============================================
+/* * * * * * *
+ * Text Analysis module for Assignment 2.
+ *
+ * created for COMP20007 Design of Algorithms 2020
+ * template by Tobias Edwards <tobias.edwards@unimelb.edu.au>
+ * implementation by <Shromann Majumder>
+ */
+
+#include "text_analysis.h"
+
+void problem_2_a() {
+  int N, i;
+  scanf("%d\n", &N);
+
+  node_t *root = init_node(START);
+
+  char text[MAXCHARSIZE];
+  for (i = 0; i < N; i++){
+    scanf("%s\n", text);
+    build(root, text); 
+  }
+
+  traverse(root); 
+  free_trie(root);
+}
+
+void problem_2_b() {
+  int N, K, i;
+  scanf("%d %d\n", &N, &K);
+  
+  node_t *root = init_node(START);
+  char text[MAXCHARSIZE];
+  for (i = 0; i < N; i++){
+    scanf("%s\n", text);
+    build(root, text); 
+  }
+
+  prefix_print(root,text,K,0);
+  free_trie(root);
+}
+
+void problem_2_c() {
+  int N,i;
+  char stub[MAXCHARSIZE];
+  scanf("%d\n%s\n", &N, stub);
+
+  node_t *root = init_node(START);
+  char text[MAXCHARSIZE];
+  for (i = 0; i < N; i++){
+    scanf("%s\n", text);
+    build(root, text); 
+  }
+
+  Deque *topfive = new_deque(); 
+  print_deque(topfive, pr(root, stub, topfive));
+  free_deque(topfive);
+  free_trie(root);
+}
+
+// ____________________________ Helper Functions  ______________________________
+
+//------------------------------------Tries-------------------------------------
+// build a trie with the word give 
+void build(node_t *root, char text[MAXCHARSIZE]){ 
+  node_t *temp = root;
+  int i, key;
+  for(i=0;i<strlen(text);i++){
+    key = hashf(text[i]);
+    if(!temp->child[key]){
+      temp->child[key] = init_node(text[i]);
+    }
+    temp = temp->child[key];
+    temp->freq = temp->freq + 1;
+  }
+  temp->isWord = temp->isWord + 1;
+} 
+// initilise a node 
+node_t *init_node(char c) { 
+  node_t *new = NULL; 
+  new = (node_t *)malloc(sizeof(node_t)); 
+  if (new) { 
+    int i; 
+    for (i = 0; i < ALPHABET_SIZE; i++){ 
+      new->child[i] = NULL; 
+    }
+      
+  }
+  new->isWord = 0; 
+  new->data = c;
+  new->freq = 0;  
+  return new; 
+} 
+// travese pre-orderly thru the trie
+void traverse(node_t *root){
+  int i; 
+  printf("%c\n", root->data);
+  if(root->isWord){
+    printf("%c\n",END);
+  }
+  for(i = 0; i < ALPHABET_SIZE; i++){
+    if(root->child[i]){
+      traverse(root->child[i]); 
+    }
+  }
+}
+// return the index of the child array for a particular charactar 
+int hashf(char c){
+  return (c - STARTINGLETTER);
+}
+// prints all prefixes of length k 
+void prefix_print(node_t *root, char str[MAXCHARSIZE], int K, int level){
+  if (level == K){ 
+      str[level] = NULLBYTE;
+      printf("%s %d\n", str, root->freq);  
+  } 
+  int i; 
+  for (i = 0; i < ALPHABET_SIZE; i++){
+    if (root->child[i]){ 
+      str[level] = i + 'a'; 
+      prefix_print(root->child[i], str, K,level + 1); 
+    } 
+  } 
+} 
+// makes a deque full possible words that have 'text' as the prefix 
+// and thier frqueinces of the word
+int pr(node_t *root,char stub[MAXCHARSIZE], Deque* topfive){
+  node_t *trav = root;
+  int i;
+  for(i = 0; i < strlen(stub); i++){
+    trav = trav->child[hashf(stub[i])];
+  }
+  getWords(trav, stub, topfive);  
+  return trav->freq; 
+}
+// gets all the words that from prefix and adds them to the deque 
+// in order: decreasing word frequencies and alphabetically 
+void getWords(node_t *root, char stub[MAXCHARSIZE], Deque *topfive) {
+	if (root->isWord || noChildren(root)){
+    Node *new = new_dnode(stub, root->isWord);
+    sortedInsert(&topfive, new);
+  } 
+	for (int i = 0; i < ALPHABET_SIZE; i++){
+		if(root->child[i] != NULL){
+      int original_len = strlen(stub); 
+      strcat(stub, &root->child[i]->data);
+			getWords(root->child[i], stub, topfive);
+      stub[original_len] = NULLBYTE;
+    }
+  }
+}
+// returns true if a node has no children and false other wise
+bool noChildren(node_t *root){
+  int i;
+  for (i = 0; i < ALPHABET_SIZE; i++){
+    if(root->child[i]){
+      return false; 
+    }
+  }
+  return true; 
+}
+// free trie
+void free_trie(node_t* root){
+    int i;
+    if(!root){
+      return;  
+    }
+    // recursive case (go to end of trie)
+    for (i = 0; i < ALPHABET_SIZE; i++){
+      free_trie(root->child[i]);
+    }
+    // base case
+    free(root);
+}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

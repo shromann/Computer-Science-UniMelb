@@ -1,5 +1,5 @@
 /* * * * * * *
- * Main program for Assignment 1
+ * Main program for Assignment 2
  *
  * created for COMP20007 Design of Algorithms 2020
  * by Tobias Edwards <tobias.edwards@unimelb.edu.au>
@@ -12,18 +12,21 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "hash.h"
+#include "text_analysis.h"
 #include "deque.h"
-#include "parkranger.h"
 #include "util.h"
 
-// We expect the command to have the form: PROG -OPT
+
+// We expect the command to have the form: PROG OPT
 #define EXPECTED_OPTS 2
 
 // Command line argument options
-#define OPT_ITERATIVE  1
-#define OPT_RECURSIVE  2
-#define OPT_SPLIT      3
-#define OPT_PARKRANGER 4
+#define OPT_P1A 1
+#define OPT_P1B 2
+#define OPT_P2A 3
+#define OPT_P2B 4
+#define OPT_P2C 5
 
 // Prints out the usage instructions and valid command line arguments for this
 // program.
@@ -35,42 +38,19 @@ void print_usage(char *prog_name);
 // provided an error is printed, along with the usage of the program.
 int get_option(int argc, char **argv);
 
-// Read integers from stdin, one per line, into a Deque and then return this
-// Deque. Integers are inserted at the bottom of the Deque so tha the first
-// integer read is the top of the Deque and the final element is the bottom of
-// the Deque.
-Deque *read_deque();
-
-// Test a Deque reverse function by reading integers from stdin into a Deque,
-// reversing the Deque using the specified function and printing the contents.
-// The Deque is freed before this function returns.
-void test_reverse(void (*reverse)(Deque *));
-
-// Test the split_deque function by reading the critical value k from stdin
-// followed by some number of integers (possibly none). These integers are
-// inserted at the bottom of the deque, and then split_deque is called. The
-// Deque is then printed and freed.
-void test_split();
-
-// Test the is_single_run_possible() function from the parkranger module.
-// This function doesn't read anything from stdin, as this is handled by the
-// function we are testing. This function will print one of the two options:
-//   the trees on the ski slope CAN be trimmed in one run
-// or,
-//   the trees on the ski slope CANNOT be trimmed in one run
-void test_parkranger();
-
 int main(int argc, char **argv) {
   int opt = get_option(argc, argv);
 
-  if (opt == OPT_ITERATIVE) {
-    test_reverse(iterative_reverse);
-  } else if (opt == OPT_RECURSIVE) {
-    test_reverse(recursive_reverse);
-  } else if (opt == OPT_SPLIT) {
-    test_split();
-  } else if (opt == OPT_PARKRANGER) {
-    test_parkranger();
+  if (opt == OPT_P1A) {
+    problem_1_a();
+  } else if (opt == OPT_P1B) {
+    problem_1_b();
+  } else if (opt == OPT_P2A) {
+    problem_2_a();
+  } else if (opt == OPT_P2B) {
+    problem_2_b();
+  } else if (opt == OPT_P2C) {
+    problem_2_c();
   }
 
   return 0;
@@ -82,10 +62,11 @@ void print_usage(char *prog_name) {
   printf("usage: %s [option] < <input_file>\n", prog_name);
   printf("\n");
   printf("options:\n");
-  printf("\tp2a \tTest the Deque iterative_reverse() function\n");
-  printf("\tp2b \tTest the Deque recursive_reverse() function\n");
-  printf("\tp2c \tTest the Deque split() function\n");
-  printf("\tp3a \tTest the is_single_run_possible() function\n");
+  printf("\tp1a \tTest the problem_1_a() function\n");
+  printf("\tp1b \tTest the problem_1_b() function\n");
+  printf("\tp2a \tTest the problem_2_a() function\n");
+  printf("\tp2b \tTest the problem_2_b() function\n");
+  printf("\tp2c \tTest the problem_2_c() function\n");
 }
 
 // Returns the command line option given to this program.
@@ -107,96 +88,19 @@ int get_option(int argc, char **argv) {
 
   // Use strcmp to determine whether a valid command line option was provided
   opt = argv[1];
-  if (strcmp(opt, "p2a") == 0) {
-    return OPT_ITERATIVE;
+  if (strcmp(opt, "p1a") == 0) {
+    return OPT_P1A;
+  } else if (strcmp(opt, "p1b") == 0) {
+    return OPT_P1B;
+  } else if (strcmp(opt, "p2a") == 0) {
+    return OPT_P2A;
   } else if (strcmp(opt, "p2b") == 0) {
-    return OPT_RECURSIVE;
+    return OPT_P2B;
   } else if (strcmp(opt, "p2c") == 0) {
-    return OPT_SPLIT;
-  } else if (strcmp(opt, "p3a") == 0) {
-    return OPT_PARKRANGER;
+    return OPT_P2C;
   }
 
   fprintf(stderr, "error: unexpected command line argument \"%s\"\n", opt);
   print_usage(argv[0]);
   exit(EXIT_FAILURE);
-}
-
-// Read integers from stdin, one per line, into a Deque and then return this
-// Deque. Integers are inserted at the bottom of the Deque so tha the first
-// integer read is the top of the Deque and the final element is the bottom of
-// the Deque.
-Deque *read_deque() {
-  int x;
-  Deque *deque = new_deque();
-
-  while (scanf("%d", &x) == 1) {
-    deque_insert(deque, (Data) x);
-  }
-
-  return deque;
-}
-
-// Test a Deque reverse function by reading integers from stdin into a Deque,
-// reversing the Deque using the specified function and printing the contents.
-// The Deque is freed before this function returns.
-void test_reverse(void (*reverse)(Deque *)) {
-  Deque *deque = read_deque();
-  printf("read %d elements into the deque\n", deque_size(deque));
-
-  printf("original deque: ");
-  print_deque(deque);
-
-  reverse(deque);
-
-  printf("reversed deque: ");
-  print_deque(deque);
-
-  free_deque(deque);
-  printf("successfully freed the deque\n");
-}
-
-// Test the split_deque function by reading the critical value k from stdin
-// followed by some number of integers (possibly none). These integers are
-// inserted at the bottom of the deque, and then split_deque is called. The
-// Deque is then printed and freed.
-void test_split() {
-  // The critical value k
-  int k;
-  Deque *deque;
-
-  // If we can't read the critical value then the input is invalid.
-  if (scanf("%d\n", &k) == 0) {
-    exit_with_error("couldn't read critical value");
-  }
-  printf("read critical value k = %d\n", k);
-
-  deque = read_deque();
-  printf("read %d elements into the deque\n", deque_size(deque));
-
-  printf("original deque: ");
-  print_deque(deque);
-
-  split_deque(deque, k);
-
-  printf("split deque: ");
-  print_deque(deque);
-
-  free_deque(deque);
-  printf("successfully freed the deque\n");
-}
-
-// Test the is_single_run_possible() function from the parkranger module.
-// This function doesn't read anything from stdin, as this is handled by the
-// function we are testing. This function will print one of the two options:
-//   the trees on the ski slope CAN be trimmed in one run
-// or,
-//   the trees on the ski slope CANNOT be trimmed in one run
-void test_parkranger() {
-  bool possible = is_single_run_possible();
-  if (possible) {
-    printf("the trees on the ski slope CAN be trimmed in one run\n");
-  } else {
-    printf("the trees on the ski slope CANNOT be trimmed in one run\n");
-  }
 }
