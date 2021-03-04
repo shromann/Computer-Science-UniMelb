@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="253648b3-a81a-4c32-9988-f33f645ab286" name="Default Changelist" comment="The slicer can now stop at the end of the point">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ShadowDefend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShadowDefend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ShadowDefend.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ShadowDefend.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="bagel" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1bNYKaVFFaUmUq1vPMC4oOG9LSz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+  </component>
+  <component name="RunManager" selected="Application.ShadowDefend">
+    <configuration name="Game" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Game" />
+      <module name="bagel" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShadowDefend" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ShadowDefend" />
+      <module name="bagel" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ShadowDefend" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="AUTOSCROLL_FROM_SOURCE" value="true" />
+    <option name="ACTIVE_ACTIONS" value=",SHOW_PROPERTIES,SHOW_INTERFACES,ALPHA_COMPARATOR,VISIBILITY_SORTER,SHOW_INHERITED" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="253648b3-a81a-4c32-9988-f33f645ab286" name="Default Changelist" comment="" />
+      <created>1588473954822</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588473954822</updated>
+    </task>
+    <task id="LOCAL-00001" summary="The slicer can now stop at the end of the point">
+      <created>1588551651559</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1588551651560</updated>
+    </task>
+    <task id="LOCAL-00002" summary="The slicer can now stop at the end of the point">
+      <created>1588551847581</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1588551847581</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="The slicer can now stop at the end of the point" />
+    <option name="LAST_COMMIT_MESSAGE" value="The slicer can now stop at the end of the point" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="240" y="65" key="#Auto_Import" timestamp="1588500233044">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="240" y="65" key="#Auto_Import/0.0.1280.800@0.0.1280.800" timestamp="1588500233044" />
+    <state x="240" y="65" key="#Inspections" timestamp="1588747211773">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="240" y="65" key="#Inspections/0.0.1280.800@0.0.1280.800" timestamp="1588747211773" />
+    <state x="240" y="35" width="800" height="765" key="#Intentions" timestamp="1588501740003">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="240" y="35" width="800" height="765" key="#Intentions/0.0.1280.800@0.0.1280.800" timestamp="1588501740003" />
+    <state x="453" y="110" key="#com.intellij.ide.util.MemberChooser" timestamp="1588782454368">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="453" y="110" key="#com.intellij.ide.util.MemberChooser/0.0.1280.800@0.0.1280.800" timestamp="1588782454368" />
+    <state x="423" y="270" width="433" height="245" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1588567633688">
+      <screen x="0" y="23" width="1280" height="736" />
+    </state>
+    <state x="423" y="270" width="433" height="245" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.23.1280.736@0.23.1280.736" timestamp="1588567633688" />
+    <state x="269" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588567649090">
+      <screen x="0" y="23" width="1280" height="736" />
+    </state>
+    <state x="269" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1280.736@0.23.1280.736" timestamp="1588567649090" />
+    <state x="378" y="154" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588593079445">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="378" y="154" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.800@0.0.1280.800" timestamp="1588593079445" />
+    <state x="328" y="51" key="#com.intellij.unscramble.UnscrambleDialog" timestamp="1588685271505">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="328" y="51" key="#com.intellij.unscramble.UnscrambleDialog/0.0.1280.800@0.0.1280.800" timestamp="1588685271505" />
+    <state x="283" y="0" key="CommitChangelistDialog2" timestamp="1588592091181">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="283" y="0" key="CommitChangelistDialog2/0.0.1280.800@0.0.1280.800" timestamp="1588592091181" />
+    <state x="100" y="100" width="1080" height="600" key="DiffContextDialog" timestamp="1588776030423">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="100" y="100" width="1080" height="600" key="DiffContextDialog/0.0.1280.800@0.0.1280.800" timestamp="1588776030423" />
+    <state width="383" height="673" key="GridCell.Tab.0.bottom" timestamp="1588822051312">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="383" height="673" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1588822051312" />
+    <state width="383" height="673" key="GridCell.Tab.0.bottom/0.23.1280.736@0.23.1280.736" timestamp="1588815830944" />
+    <state width="1238" height="165" key="GridCell.Tab.0.bottom/0.23.1280.777@0.23.1280.777" timestamp="1588474208317" />
+    <state width="383" height="673" key="GridCell.Tab.0.center" timestamp="1588822051311">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="383" height="673" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1588822051311" />
+    <state width="383" height="673" key="GridCell.Tab.0.center/0.23.1280.736@0.23.1280.736" timestamp="1588815830942" />
+    <state width="1238" height="165" key="GridCell.Tab.0.center/0.23.1280.777@0.23.1280.777" timestamp="1588474208316" />
+    <state width="383" height="673" key="GridCell.Tab.0.left" timestamp="1588822051309">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="383" height="673" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1588822051309" />
+    <state width="383" height="673" key="GridCell.Tab.0.left/0.23.1280.736@0.23.1280.736" timestamp="1588815830941" />
+    <state width="1238" height="165" key="GridCell.Tab.0.left/0.23.1280.777@0.23.1280.777" timestamp="1588474208315" />
+    <state width="383" height="673" key="GridCell.Tab.0.right" timestamp="1588822051312">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="383" height="673" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1588822051311" />
+    <state width="383" height="673" key="GridCell.Tab.0.right/0.23.1280.736@0.23.1280.736" timestamp="1588815830943" />
+    <state width="1238" height="165" key="GridCell.Tab.0.right/0.23.1280.777@0.23.1280.777" timestamp="1588474208316" />
+    <state width="1238" height="244" key="GridCell.Tab.1.bottom" timestamp="1588571669444">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="244" key="GridCell.Tab.1.bottom/0.0.1280.800@0.0.1280.800" timestamp="1588571669444" />
+    <state width="1238" height="244" key="GridCell.Tab.1.center" timestamp="1588571669443">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="244" key="GridCell.Tab.1.center/0.0.1280.800@0.0.1280.800" timestamp="1588571669443" />
+    <state width="1238" height="244" key="GridCell.Tab.1.left" timestamp="1588571669442">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="244" key="GridCell.Tab.1.left/0.0.1280.800@0.0.1280.800" timestamp="1588571669442" />
+    <state width="1238" height="244" key="GridCell.Tab.1.right" timestamp="1588571669443">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1238" height="244" key="GridCell.Tab.1.right/0.0.1280.800@0.0.1280.800" timestamp="1588571669443" />
+    <state x="473" y="44" key="RollbackChangesDialog" timestamp="1588551709364">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="473" y="44" key="RollbackChangesDialog/0.0.1280.800@0.0.1280.800" timestamp="1588551709364" />
+    <state x="175" y="0" key="SettingsEditor" timestamp="1588782945055">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="175" y="0" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1588782945055" />
+    <state x="494" y="314" key="VCS.ChangelistChooser" timestamp="1588553291796">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="494" y="314" key="VCS.ChangelistChooser/0.0.1280.800@0.0.1280.800" timestamp="1588553291796" />
+    <state width="581" height="800" key="com.intellij.byteCodeViewer.ShowByteCodeAction" timestamp="1588642873231">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="581" height="800" key="com.intellij.byteCodeViewer.ShowByteCodeAction/0.0.1280.800@0.0.1280.800" timestamp="1588642873231" />
+    <state x="443" y="319" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588551828183">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="443" y="319" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.800@0.0.1280.800" timestamp="1588551828183" />
+    <state x="419" y="107" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1588500196037">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="419" y="107" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1280.800@0.0.1280.800" timestamp="1588500196037" />
+    <state x="378" y="149" key="extract.method.dialog" timestamp="1588501613106">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="378" y="149" key="extract.method.dialog/0.0.1280.800@0.0.1280.800" timestamp="1588501613106" />
+    <state x="402" y="6" key="refactoring.ChangeSignatureDialog" timestamp="1588502819411">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="402" y="6" key="refactoring.ChangeSignatureDialog/0.0.1280.800@0.0.1280.800" timestamp="1588502819411" />
+    <state x="305" y="185" width="670" height="675" key="run.anything.popup" timestamp="1588774462532">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="305" y="185" width="670" height="675" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1588774462532" />
+    <state x="305" y="104" width="670" height="697" key="search.everywhere.popup" timestamp="1588774844097">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="305" y="104" width="670" height="697" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1588774844097" />
+    <state x="305" y="119" width="670" height="642" key="search.everywhere.popup/0.23.1280.736@0.23.1280.736" timestamp="1588568697743" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.23.1280.777@0.23.1280.777" timestamp="1588474286197" />
+  </component>
+</project>
