@@ -1,14 +1,3 @@
-DFA.hs
-NFA.hs
-VisDFA.hs
-
-Idempotence.hs
-Automaton Design.hs
-skip-dfa.hs
-context-free-grammar.hs
-deterministic-push-down-automata.hs
-model-automata
-
 # Problems
 Here are the problems that I have solved in their respective *Haskell* programs.
 
