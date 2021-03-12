@@ -1,0 +1,70 @@
+-- we provide the same files as in assessed worksheet 4
+import DFA
+import NFA
+import VisDFA
+-- along with the generalised expression type from assignment 1
+import Exp
+-- we provide solutions to worksheet 4 problems, you may find useful
+import HiddenAlgorithms (productDFA, complementDFA)
+-- one more module is required for testing purposes
+import Hidden
+
+
+-- TODO: Implement this function
+ithIsTrue :: Int -> DFA
+ithIsTrue i
+  = ([1..finalState], "tf", t, 1, [finalState])
+  where
+    finalState = i + 3
+    deadState = finalState - 1
+    ithState = finalState - 2
+    t = t1 ++ t2 
+    t1 = [((currState, truthAssignment), currState + 1) | 
+           currState <- [1..i], truthAssignment <- ['t', 'f']]
+           
+    t2 = [((ithState,'t'), finalState), 
+          ((ithState,'f'), deadState),
+          
+          ((deadState,'t'), deadState),
+          ((deadState,'f'), deadState),
+    
+          ((finalState,'t'), finalState),
+          ((finalState,'f'), finalState)]
+
+
+-- TODO: Implement this function
+models :: Exp -> DFA
+
+-- Base Cases:
+models TRUE = ([1], "tf", t, 1, [1])
+    where
+        t = [((1,'t'),1),((1,'f'),1)] 
+
+models (VAR v) = ithIsTrue v
+
+-- Recursive Cases: 
+--                     FALSE
+models FALSE = models (NOT TRUE)
+
+--                     NOT
+models (NOT a) = complementDFA (models a)
+
+--                     AND
+models (AND a b) = productDFA (models a) (models b) 
+
+--                     OR
+models (OR a b) = models (NOT (AND (NOT a) (NOT b)))
+
+--                     XOR
+models (XOR a b) = models (AND (NOT (AND a b)) (OR a b))
+
+--                     IMPL
+models (IMPL a b) = models (NOT (AND (a) (NOT b)))
+
+--                     BIIM
+models (BIIM a b) = models (AND (IMPL a b) (IMPL b a))
+
+
+
+
+
